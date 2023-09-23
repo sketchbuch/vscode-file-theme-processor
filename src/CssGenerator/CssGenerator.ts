@@ -16,6 +16,9 @@ import {
   CssProp,
 } from './CssGenerator.interface'
 
+/**
+ * Gives VSCode Webviews the CSS needed to render file icons using the current icon file theme in VSCode. Data from FileThemeProcessor is required to generate the CSS.
+ */
 export class CssGenerator implements CssGeneratorIntreface {
   private readonly _baseClass: string = 'file-icon'
   private readonly _sessionCache: CssCache = {}
@@ -55,11 +58,11 @@ export class CssGenerator implements CssGeneratorIntreface {
 
     return `${classes.join('::before, ')}::before {
         ${cssProps
-    .map((prop) => {
-      return `${prop.key}: ${prop.value};
+          .map((prop) => {
+            return `${prop.key}: ${prop.value};
             `
-    })
-    .join('')}
+          })
+          .join('')}
       }
     `
   }

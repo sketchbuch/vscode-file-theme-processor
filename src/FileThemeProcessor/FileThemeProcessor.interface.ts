@@ -1,6 +1,9 @@
 // See: https://github.com/microsoft/vscode/blob/main/src/vs/workbench/services/themes/browser/fileIconThemeData.ts
 // Interfaces are not exported
 
+/**
+ * Webviews should implement this interface to be able to get notified when th file theme changes.
+ */
 export interface FileThemeProcessorObserver {
   /**
    * Inform this observer that the file theme has changed.

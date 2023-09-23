@@ -18,7 +18,7 @@ module.exports = {
     "comma-dangle": ["warn", "only-multiline"],
     "eol-last": ["error", "always"],
     "no-extra-semi": "error",
-    "indent": ["error", 2],
+    "indent": "off",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }],
     "object-curly-spacing": ["error", "always"]
   }

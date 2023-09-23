@@ -21,6 +21,9 @@ import {
   ThemeSessionCacheData,
 } from './FileThemeProcessor.interface'
 
+/**
+ * Gives VSCode Webviews access to icon file theme data and also notifys Webviews if the file icon theme changes so that they can re-render.
+ */
 export class FileThemeProcessor implements ObserverableFileThemeProcessor {
   private _observers: Set<FileThemeProcessorObserver>
   private readonly _cacheDuration = 604800 // 1 Week
