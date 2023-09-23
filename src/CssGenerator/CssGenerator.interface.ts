@@ -6,7 +6,7 @@ export interface CssCache {
 }
 
 export interface CssData {
-  defCount: number
+  defCount: number // The number of CSS rules in iconCss
   fontFaceCss: string
   iconCss: string
 }
@@ -20,9 +20,12 @@ export interface CssProp {
   value: string
 }
 
+/**
+ * CSS Generators should implement this interface.
+ */
 export interface CssGeneratorIntreface {
   /**
-   * Get CSS for the webview.
+   * Get CSS for the webview form the theme data.
    */
   getCss(themeData: ThemeJson, themeId: string, webview: vscode.Webview): CssData
 }

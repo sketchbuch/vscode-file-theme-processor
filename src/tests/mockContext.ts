@@ -21,7 +21,7 @@ export const getMockContext = () => {
     extension: {} as vscode.Extension<any>,
     extensionPath,
     environmentVariableCollection: {} as vscode.EnvironmentVariableCollection,
-    extensionMode: vscode.ExtensionMode.Test,
+    extensionMode: 3,
     extensionUri: getMockUri(),
     globalState: {
       get: (key: string) => {
