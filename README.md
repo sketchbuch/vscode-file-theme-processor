@@ -4,7 +4,7 @@ Provides VSCode webviews with access to file icon theme data and generates requi
 
 ---
 
-There is no API way to get file icons in webviews, only tree views. This package will let you render file icon from the current file icon theme inside your webviews.
+There is no API way to get file icons in webviews, only tree views. This package will let you render file icons from the current file icon theme inside your webviews.
 
 It uses a observer pattern so your webview(s) can subscribe to the file processor to be notified about changs to the theme.
 
@@ -27,7 +27,7 @@ export const activate = (vscodeExtContext: vscode.ExtensionContext): void => {
 }
 ```
 
-In your webview's constructor, subscibe to the `FileThemeProcessor` and create an instance of a `CSSGenerator`. This will be used to create the css from the data privided by the `FileThemeProcessor``.
+In your webview's constructor, subscibe to the `FileThemeProcessor` and create an instance of a `CSSGenerator`. This will be used to create the css from the data privided by the `FileThemeProcessor`.
 
 The subscribe call is required so that your webview can be notified about changes to the file icon theme and the data cached by the `FileThemeProcessor`.
 
@@ -100,7 +100,7 @@ Icons can just be a span with the required classes, i.e.:
 
 `ICON_TYPE` should be passed through the function `cleanFileIconKey()`. Certain characters create invalid css or have a specific meaning in css and so should not be used in css declarations or class names.
 
-How you match decide which icons to render will depend upon your use case and are not covered in this documentation.
+How you decide which icons to render will depend upon your use case and are not covered in this documentation.
 
 In your templating system, `workspace.getConfiguration('workbench').iconTheme` can be used to see if file icon themes have been switched off by the user. If this is null the user doesn't expect to see file theme icons.
 
