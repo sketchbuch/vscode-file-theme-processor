@@ -213,6 +213,13 @@ export class CssGenerator implements CssGeneratorIntreface {
     return cssProps
   }
 
+  private baseCss(): string {
+    return `
+      .${this._baseClass} { display: flex; height: 22px; line-height: 22px; top: 0.05rem; width: 22px; }
+      .${this._baseClass}::before { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-position: 0; background-repeat: no-repeat; background-size: 16px; display: inline-block; flex-shrink: 0; height: 22px; line-height: inherit !important; margin-left: unset; vertical-align: top; width: 16px; }
+    `
+  }
+
   public getCss(themeData: ThemeJson, themeId: string, webview: vscode.Webview): CssData {
     const sessionCacheData = this.getSessionCacheData(themeId)
 
@@ -223,14 +230,17 @@ export class CssGenerator implements CssGeneratorIntreface {
     const defs = this.getDefinitions(themeData)
     const defKeys = Object.keys(defs)
 
+    const fontFaceCss = this.getFontFace(themeData, webview)
+    const iconCss = defKeys
+      .map((def: string) => {
+        return this.getClasses(themeData, def, defs[def], webview)
+      })
+      .join('\n')
+
     const cssData: CssData = {
       defCount: defKeys.length,
-      fontFaceCss: this.getFontFace(themeData, webview),
-      iconCss: defKeys
-        .map((def: string) => {
-          return this.getClasses(themeData, def, defs[def], webview)
-        })
-        .join('\n'),
+      fontFaceCss,
+      iconCss: `${this.baseCss()}\n${iconCss}`,
     }
 
     this.setSessionCacheData(themeId, cssData)

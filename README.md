@@ -57,9 +57,9 @@ export class YourwebviewViewProvider implements vscode.webviewViewProvider, File
 
 Then in your render method, get the file theme data from the processor and then generate the CSS with the generator.
 
-If the data contains localResourceRoots, update your webview's options to include them. This is so any recources used by the theme can be served to the webview. Without doing this, fonts and images from the file icon theme extension will not be useable.
+If the data contains localResourceRoots, update your webview's options to include them. This is so any resources used by the theme can be served to the webview. Without doing this, fonts and images from the file icon theme extension will not be useable.
 
-The theme data also includes the state of the processor, this could be, idle, loading, error (means something when wrong loading the data), and ready (data is ready and in the cache). Your webview could react to these different states to alter what you render - this is left upto you.
+The theme data also includes the state of the processor, this could be, idle, loading, error (means something when wrong loading the data), and ready (data is ready and in the cache). Your webview could react to these different states to alter what you render - this is left up to you.
 
 ```typescript
 ...
@@ -95,7 +95,7 @@ The css data should be added to a style tag in the head of your webview html.
 Icons can just be a span with the required classes, i.e.:
 
 ```html
-<div class="file-icon file-icon-type-ICON_TYPE"></div>
+<span class="file-icon file-icon-type-ICON_TYPE"></span>
 ```
 
 `ICON_TYPE` should be passed through the function `cleanFileIconKey()`. Certain characters create invalid css or have a specific meaning in css and so should not be used in css declarations or class names.

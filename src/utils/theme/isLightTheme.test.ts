@@ -8,9 +8,7 @@ describe('Utils > Theme > isLightTheme()', () => {
   })
 
   test('Returns false if the theme is "HighContrast"', () => {
-    expect(isLightTheme({ kind: 3 } as vscode.ColorTheme)).toBe(
-      false
-    )
+    expect(isLightTheme({ kind: 3 } as vscode.ColorTheme)).toBe(false)
   })
 
   test('Returns true if the theme is "Light"', () => {
@@ -18,8 +16,6 @@ describe('Utils > Theme > isLightTheme()', () => {
   })
 
   test('Returns true if the theme is "HighContrastLight"', () => {
-    expect(
-      isLightTheme({ kind: 4 } as vscode.ColorTheme)
-    ).toBe(true)
+    expect(isLightTheme({ kind: 4 } as vscode.ColorTheme)).toBe(true)
   })
 })
