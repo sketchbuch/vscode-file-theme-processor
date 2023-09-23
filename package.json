@@ -1,0 +1,57 @@
+{
+  "name": "vscode-file-theme-processor",
+  "version": "1.1.0",
+  "description": "Provides VSCode Webviews with access to file icon theme data and generates required css to render file icon themes in Webviews.",
+  "author": "Sketchbuch",
+  "bugs": {
+    "url": "https://github.com/sketchbuch/vscode-file-theme-processor/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/sketchbuch/vscode-file-theme-processor#readme",
+  "keywords": [
+    "file",
+    "file-icons",
+    "file-theme",
+    "icons",
+    "theme",
+    "vsc",
+    "vscode",
+    "webview"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sketchbuch/vscode-file-theme-processor.git"
+  },
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf ./dist/*",
+    "compile": "tsc --p ./",
+    "lint:prettier": "prettier --write --config ./.prettierrc.json './src/**/*.ts'",
+    "lint:ts": "eslint --config ./.eslintrc.js --fix --max-warnings=0 './src/**/*.ts'",
+    "lint": "pnpm lint:ts && pnpm lint:prettier",
+    "prepublishOnly": "pnpm clean && pnpm compile",
+    "test": "jest --config=./config/jest/jest.js",
+    "typecheck": "tsc --noEmit --p ./"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.6.3",
+    "@types/vscode": "^1.82.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "json5": "^2.2.3"
+  }
+}
