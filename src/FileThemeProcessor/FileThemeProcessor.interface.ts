@@ -2,11 +2,11 @@
 // Interfaces are not exported
 
 /**
- * Webviews should implement this interface to be able to get notified when th file theme changes.
+ * Webviews should implement this interface to be able to get notified when the file theme changes.
  */
 export interface FileThemeProcessorObserver {
   /**
-   * Inform this observer that the file theme has changed.
+   * The file theme processor will call this method on all observers, to inform them that the processor state has changed.
    */
   notify(): void
 }
