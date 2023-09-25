@@ -1,4 +1,4 @@
-# VSCode File Theme Data Processor
+# VSCode File Theme Data Processor for Webviews
 
 Provides VSCode webviews with access to file icon theme data and generates required css to render file icon themes in webviews.
 
