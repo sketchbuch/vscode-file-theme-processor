@@ -21,7 +21,7 @@ Then pass the `FileThemeProcessor` instance to your webview's constructor.
 ```typescript
 export const activate = (vscodeExtContext: vscode.ExtensionContext): void => {
   const fileThemeProcessor = new FileThemeProcessor(vscodeExtContext)
-  const workspaceViewProvider = new YourwebviewViewProvider(vscodeExtContext, fileThemeProcessor)
+  const yourwebviewViewProvider = new YourwebviewViewProvider(vscodeExtContext, fileThemeProcessor)
 
   ...
 }
@@ -65,7 +65,7 @@ The theme data also includes the state of the processor, this could be, idle, lo
 ...
 
 private render() {
-  const state = store.getState().ws
+  ...
 
   const themeData: GetThemeData = this._fileThemeProcessor.getThemeData()
   let cssData: CssData | null = null
