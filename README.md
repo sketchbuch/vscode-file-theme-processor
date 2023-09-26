@@ -50,6 +50,7 @@ export class YourwebviewViewProvider implements vscode.webviewViewProvider, File
   ...
 
   public notify() {
+    // Re-render if resolveWebviewView() has been called
     this.render()
   }
 }
