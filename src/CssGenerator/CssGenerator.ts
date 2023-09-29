@@ -224,6 +224,7 @@ export class CssGenerator implements CssGeneratorIntreface {
     const sessionCacheData = this.getSessionCacheData(themeId)
 
     if (sessionCacheData) {
+      console.log('### CssGenerator() - using session cache', themeId)
       return sessionCacheData
     }
 
@@ -244,6 +245,7 @@ export class CssGenerator implements CssGeneratorIntreface {
     }
 
     this.setSessionCacheData(themeId, cssData)
+    console.log('### CssGenerator() - generating data', themeId)
 
     return cssData
   }

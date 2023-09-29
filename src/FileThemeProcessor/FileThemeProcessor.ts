@@ -36,6 +36,7 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
   private _sessionCache: ThemeSessionCacheData = {}
 
   constructor(private readonly _ctx: vscode.ExtensionContext) {
+    console.log('### test version 9')
     this._observers = new Set()
     this.watchConfig()
     this.init()
@@ -88,7 +89,7 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
       this.processThemeData()
     } else {
       this._state = 'ready'
-      this.notifyAll()
+      this.notifyAll(this._state)
     }
   }
 
@@ -145,24 +146,25 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
     return themeData
   }
 
-  private notifyAll() {
+  private notifyAll(state: FileThemeProcessorState) {
     this._observers.forEach((observer) => {
-      observer.notify()
+      observer.notify(state)
     })
   }
 
   private async processThemeData() {
+    const activeFileiconTheme = this.getFileiconTheme()
+
     try {
       this._state = 'loading'
-      this.notifyAll() // Let webviews handle loading if they want
+      this.notifyAll(this._state) // Let webviews handle loading if they want
 
       await this.deleteThemeData()
-      const activeFileiconTheme = this.getFileiconTheme()
 
       // File icon themes disabled
       if (activeFileiconTheme === null) {
         this._state = 'ready'
-        this.notifyAll()
+        this.notifyAll(this._state)
 
         return
       }
@@ -173,7 +175,7 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
         await this.setThemeData(sessionCacheData)
 
         this._state = 'ready'
-        this.notifyAll()
+        this.notifyAll(this._state)
 
         return
       }
@@ -186,7 +188,7 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
         }
 
         this._state = 'error'
-        this.notifyAll()
+        this.notifyAll(this._state)
 
         return
       }
@@ -266,14 +268,14 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
       await this.setThemeData(themeCacheData)
 
       this._state = 'ready'
-      this.notifyAll()
+      this.notifyAll(this._state)
     } catch (error) {
       if (this._ctx.extensionMode !== vscode.ExtensionMode.Production) {
         vscode.window.showErrorMessage('An error occured whilst processing theme data:' + error)
       }
 
       this._state = 'error'
-      this.notifyAll()
+      this.notifyAll(this._state)
     }
   }
 
