@@ -192,6 +192,8 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
       }
 
       const themePath = path.join(activeExtThemeData.extPath, activeExtThemeData.themePath)
+      const { dir } = path.parse(themePath)
+
       const jsonContent = fs.readFileSync(themePath, 'utf8')
       const jsonData = JSON5.parse(jsonContent) as ThemeJson
 
@@ -199,7 +201,6 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
 
       if (jsonData.fonts) {
         fontsData = [...jsonData.fonts].map((font) => {
-          const { dir } = path.parse(themePath)
           const newPath = path.join(dir, font.src[0].path)
 
           return {
@@ -216,16 +217,7 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
         const newDef: ThemeJsonIconDef = { ...oldDef }
 
         if (oldDef.iconPath) {
-          let cleanedPath = oldDef.iconPath
-
-          if (cleanedPath.startsWith('./')) {
-            const { dir } = path.parse(activeExtThemeData.themePath)
-            cleanedPath = cleanedPath.replace('./', `${dir}/`)
-          } else if (cleanedPath.startsWith('/..')) {
-            cleanedPath = cleanedPath.replace('/..', '')
-          }
-
-          newDef.iconPath = path.join(activeExtThemeData.extPath, cleanedPath)
+          newDef.iconPath = path.join(dir, oldDef.iconPath)
         } else if (!newDef.fontId && fontsData.length === 1) {
           newDef.fontId = fontsData[0].id
         } // Multiple fonts, id must already be set
