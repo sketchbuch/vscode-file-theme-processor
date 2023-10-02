@@ -14,7 +14,7 @@ Install like any other package using your package manager of choice, for example
 
 ## How to Use
 
-After installing you should create an instance of `FileThemeProcessor` in your extension, pass the extension context as an argument to the constructor.
+After installing, you should create an instance of `FileThemeProcessor` in your extension, pass the extension context as an argument to the constructor.
 
 Then pass the `FileThemeProcessor` instance to your webview's constructor.
 
@@ -50,8 +50,10 @@ export class YourwebviewViewProvider implements vscode.webviewViewProvider, File
   ...
 
   public notify() {
-    // Re-render if resolveWebviewView() has been called
-    this.render()
+    // Example: Only reender if this webview has been resolved
+    if (viewExists) {
+      this.render()
+    }
   }
 }
 ```
@@ -62,9 +64,9 @@ If the data contains localResourceRoots, update your webview's options to includ
 
 The theme data also includes the state of the processor, this could be, idle, loading, error (means something when wrong loading the data), and ready (data is ready and in the cache). Your webview could react to these different states to alter what you render - this is left up to you.
 
-```typescript
-...
+If you want to, you could cache the CSS data in the global storage. See FAQ question 3 below.
 
+```typescript
 private render() {
   ...
 
@@ -77,18 +79,17 @@ private render() {
 
   webviewView.webview.options = {
     localResourceRoots: [
-      this._ctx.extensionUri,
       ...themeData.localResourceRoots.map((resouceRoot) => {
         return vscode.Uri.parse(resouceRoot)
       }),
+      ...
     ],
     ...
   }
 
   // Use the themeDate and cssData in rendering your webview...
+  ...
 }
-
-...
 ```
 
 Pass the css and theme data to whatever templating system you are using to generate the html for your webview.
@@ -125,6 +126,8 @@ In case your icon is not found you should fallback to the default file icon in t
 
 Whilst developing this package I came across themes with trailing commas which broke the parsing of the extension json. Some of these themes had not been updated for over 3 years so rather than just let some of these themes break this package I switched to json5 which is more forgiving of badly formed json.
 
+VSCode had no issues loading these themes so I assume it is using JSON5 too, or their own json parser.
+
 2.  **Why does this package create classes like `file-icon-type-xxx`?**
 
 The file explorer has similar names but instead of "type" the location of the icon in the theme was used, like lang, ext, name etc. This means the explorer renders many classes for each icon like `php-name-file-icon php-lang-file-icon` which both render the same icon.
@@ -135,7 +138,7 @@ I can't see the need to distinguish between icons for language and extensions fo
 
 In order to generate the CSS, you need access to the webview's `asWebviewUri()` method for creating correct URLs. Looking at the source, it seems like the URLs generated could be different from web view to webview and from environment to environment.
 
-Since I could guarantee that the URLs would always be correct for each webview, I decided not to cache the data globally but just in memory with in each css generator.
+Since I could guarantee that the URLs would always be correct for each webview, I decided not to cache the data globally but just in memory with in each css generator. You are free to cache the CSS in global storage via your webview. If you do this you should clear the cache when you get a loading notification as the processor will have dumped the cached data for the theme and is in the process of loading theme data.
 
 ## Examples
 
