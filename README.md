@@ -110,7 +110,7 @@ In your templating system, `workspace.getConfiguration('workbench').iconTheme` c
 
 ## Themes
 
-Not all themes provide the same icons. There are icons for specific folders, generic icons like a file, and icons for specific things like languages, file names, file extensionsm, etc.
+Not all themes provide the same icons. There are icons for specific folders, generic icons like a file, and icons for specific things like languages, file names, file extensions, etc.
 
 There are also duplicates of all these categories for light and high contrast versions of icons.
 
