@@ -80,7 +80,7 @@ private render() {
   webviewView.webview.options = {
     localResourceRoots: [
       ...themeData.localResourceRoots.map((resouceRoot) => {
-        return vscode.Uri.parse(resouceRoot)
+        return vscode.Uri.file(resouceRoot)
       }),
       ...
     ],

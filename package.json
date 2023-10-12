@@ -1,6 +1,6 @@
 {
   "name": "vscode-file-theme-processor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Provides VSCode Webviews with access to file icon theme data and generates required css to render file icon themes in Webviews.",
   "author": "Sketchbuch",
   "bugs": {
