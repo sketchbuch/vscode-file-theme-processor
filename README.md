@@ -21,7 +21,7 @@ Then pass the `FileThemeProcessor` instance to your webview's constructor.
 ```typescript
 export const activate = (vscodeExtContext: vscode.ExtensionContext): void => {
   const fileThemeProcessor = new FileThemeProcessor(vscodeExtContext)
-  const yourwebviewViewProvider = new YourwebviewViewProvider(vscodeExtContext, fileThemeProcessor)
+  const yourWebviewViewProvider = new YourWebviewViewProvider(vscodeExtContext, fileThemeProcessor)
 
   ...
 }
@@ -36,8 +36,9 @@ Your webview should also implement the interface `FileThemeProcessorObserver`. T
 When this happens, you should re-render your webview.
 
 ```typescript
-export class YourwebviewViewProvider implements vscode.webviewViewProvider, FileThemeProcessorObserver {
+export class YourWebviewViewProvider implements vscode.webviewViewProvider, FileThemeProcessorObserver {
   private _cssGenerator: CssGenerator
+  private _view?: vscode.WebviewView
 
   constructor(
     private readonly _ctx: vscode.ExtensionContext,
@@ -47,11 +48,21 @@ export class YourwebviewViewProvider implements vscode.webviewViewProvider, File
     this._fileThemeProcessor.subscribe(this)
   }
 
+  private render() {
+    ...
+  }
+
+  public resolveWebviewView(webviewView: vscode.WebviewView) {
+    this._view = webviewView
+
+    ...
+  }
+
   ...
 
-  public notify() {
-    // Example: Only reender if this webview has been resolved
-    if (viewExists) {
+  public notify(state: FileThemeProcessorState) {
+    // Example: Only reender if this webview has been resolved and theme data has been collected
+    if (this._view && state === 'ready') {
       this.render()
     }
   }
@@ -136,7 +147,7 @@ I can't see the need to distinguish between icons for language and extensions fo
 
 3. **Why does the CSS Generator not cache the generated css in global storage?**
 
-In order to generate the CSS, you need access to the webview's `asWebviewUri()` method for creating correct URLs. Looking at the source, it seems like the URLs generated could be different from web view to webview and from environment to environment.
+In order to generate the CSS, you need access to the webview's `asWebviewUri()` method for creating correct URLs. Looking at the source, it seems like the URLs generated could be different from webview to webview and from environment to environment.
 
 Since I could guarantee that the URLs would always be correct for each webview, I decided not to cache the data globally but just in memory with in each css generator. You are free to cache the CSS in global storage via your webview. If you do this you should clear the cache when you get a loading notification as the processor will have dumped the cached data for the theme and is in the process of loading theme data.
 

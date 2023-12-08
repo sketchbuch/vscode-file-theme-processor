@@ -8,7 +8,7 @@ export interface FileThemeProcessorObserver {
   /**
    * The file theme processor will call this method on all observers, to inform them that the processor state has changed.
    */
-  notify(): void
+  notify(state: FileThemeProcessorState): void
 }
 
 export interface ObserverableFileThemeProcessor {

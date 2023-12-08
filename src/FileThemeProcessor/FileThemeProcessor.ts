@@ -147,7 +147,7 @@ export class FileThemeProcessor implements ObserverableFileThemeProcessor {
 
   private notifyAll() {
     this._observers.forEach((observer) => {
-      observer.notify()
+      observer.notify(this._state)
     })
   }
 
