@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5](https://github.com/sketchbuch/vscode-file-theme-processor/compare/v1.0.4...v1.0.5) (2024-01-17)
+
+- [Cleaning of keys now removes commas](https://github.com/sketchbuch/vsc-workspace-sidebar/issues/112)
+
 ## [1.0.4](https://github.com/sketchbuch/vscode-file-theme-processor/compare/v1.0.3...v1.0.4) (2023-12-08)
 
 - Updated readme.
