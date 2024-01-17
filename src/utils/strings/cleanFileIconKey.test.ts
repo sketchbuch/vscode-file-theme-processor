@@ -21,6 +21,7 @@ describe('Utils > Strings > cleanFileIconKey()', () => {
     { cleanedKey: 'some-key', key: 'some/key', replace: '/', search: '.' },
     { cleanedKey: 'cpp', key: 'c++', replace: 'p', search: '+' },
     { cleanedKey: 'ch', key: 'c#', replace: 'h', search: '#' },
+    { cleanedKey: 'puppeteer', key: 'puppeteer,', replace: '', search: ',' },
   ]
 
   testKeys.forEach((testObj) => {
