@@ -1,4 +1,4 @@
-name: Publish to NPM
+name: Test Publish
 on:
   release:
     types: [created]
