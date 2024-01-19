@@ -2,12 +2,11 @@
 #  - Based on: https://dev.to/astagi/publish-to-npm-using-github-actions-23fn
 #  - But uses PNPM instead on NPM for deps.
 
-name: Publish to NPM
+name: Publish to NPM 2
 on:
   release:
     types: [created]
-  # Allow manual triggering, for testing:
-  # workflow_dispatch:
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,10 +28,12 @@ jobs:
       - name: Install dependencies 🔧
         run: pnpm install --frozen-lockfile
       
-      #- name: Pre-package Test 🔧
-      #  run: pnpm prepublishOnly
+      - name: Pre-package Test 🔧
+        run: pnpm prepublishOnly
+        if: github.event_name == 'workflow_dispatch'
       
-      - name: Publish package to NPM 📦
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #- name: Publish package to NPM 📦
+      #  run: npm publish
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #  if: github.event_name != 'workflow_dispatch'
