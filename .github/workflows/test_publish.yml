@@ -1,4 +1,8 @@
-name: Test Publish
+# Publish this NPM package to NPM.
+#  - Based on: https://dev.to/astagi/publish-to-npm-using-github-actions-23fn
+#  - But uses PNPM instead on NPM for deps.
+
+name: Test Publish 3
 on:
   release:
     types: [created]
