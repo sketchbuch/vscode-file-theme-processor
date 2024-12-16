@@ -23,8 +23,8 @@ export const getDefaultExtThemeData = (activeFileiconTheme: string): ExtThemeDat
   let themeData: ExtThemeData = null
 
   try {
-    extTheme: for (const ext of vscode.extensions.all) {
-      if (ext.packageJSON.contributes.iconThemes) {
+    defTheme: for (const ext of vscode.extensions.all) {
+      if (ext.packageJSON?.contributes.iconThemes) {
         const iconThemes = ext.packageJSON.contributes.iconThemes as ThemeInfo[]
 
         for (const themeInfo of iconThemes) {
@@ -39,7 +39,7 @@ export const getDefaultExtThemeData = (activeFileiconTheme: string): ExtThemeDat
                 themePath: themeInfo.path,
               }
 
-              break extTheme
+              break defTheme
             }
           }
         }
@@ -72,7 +72,7 @@ export const getUserExtThemeData = async (activeFileiconTheme: string): Promise<
             const packageJsonContent = await fs.promises.readFile(packageJsonPath, 'utf8')
             const packageJson = JSON5.parse(packageJsonContent)
 
-            if (packageJson.contributes && packageJson.contributes.iconThemes) {
+            if (packageJson?.contributes.iconThemes) {
               const iconThemes = packageJson.contributes.iconThemes as ThemeInfo[]
 
               for (const themeInfo of iconThemes) {
