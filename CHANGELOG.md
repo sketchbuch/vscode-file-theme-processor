@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.6](https://github.com/sketchbuch/vscode-file-theme-processor/compare/v1.0.5...v1.0.6) (2024-12-16)
+
+- Closes [#1](https://github.com/sketchbuch/vscode-file-theme-processor/issues/1) **Default Fileicons are not loading anymore**
+
 ## [1.0.5](https://github.com/sketchbuch/vscode-file-theme-processor/compare/v1.0.4...v1.0.5) (2024-01-17)
 
 - [Cleaning of keys now removes commas](https://github.com/sketchbuch/vsc-workspace-sidebar/issues/112)
