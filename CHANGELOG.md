@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.8](https://github.com/sketchbuch/vscode-file-theme-processor/compare/v1.0.5...v1.0.8) (2024-12-21)
+
+- Closes [#1](https://github.com/sketchbuch/vscode-file-theme-processor/issues/1) **Default Fileicons are not loading anymore**
+
 ## [1.0.7](https://github.com/sketchbuch/vscode-file-theme-processor/compare/v1.0.5...v1.0.7) (2024-12-21)
 
 - Closes [#1](https://github.com/sketchbuch/vscode-file-theme-processor/issues/1) **Default Fileicons are not loading anymore**
