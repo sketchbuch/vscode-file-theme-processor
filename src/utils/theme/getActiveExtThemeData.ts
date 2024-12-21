@@ -24,7 +24,7 @@ export const getDefaultExtThemeData = (activeFileiconTheme: string): ExtThemeDat
 
   try {
     defTheme: for (const ext of vscode.extensions.all) {
-      if (ext.packageJSON?.contributes.iconThemes) {
+      if (ext.packageJSON.contributes && ext.packageJSON.contributes.iconThemes) {
         const iconThemes = ext.packageJSON.contributes.iconThemes as ThemeInfo[]
 
         for (const themeInfo of iconThemes) {
@@ -72,7 +72,7 @@ export const getUserExtThemeData = async (activeFileiconTheme: string): Promise<
             const packageJsonContent = await fs.promises.readFile(packageJsonPath, 'utf8')
             const packageJson = JSON5.parse(packageJsonContent)
 
-            if (packageJson?.contributes.iconThemes) {
+            if (packageJson.contributes && packageJson.contributes.iconThemes) {
               const iconThemes = packageJson.contributes.iconThemes as ThemeInfo[]
 
               for (const themeInfo of iconThemes) {
